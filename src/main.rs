@@ -1,8 +1,8 @@
 use std::{fmt::Display, time::Duration};
 
 fn main() {
-    let n = 42;
-    let p = 6;
+    let _n = 42;
+    let _p = 6;
     power_test_1();
 
     println!("Hello, world!");
@@ -32,7 +32,7 @@ fn main() {
     let n = 3;
     println!(
         "repeating {n} times '{str}' gives '{}'",
-        repeat_str(&str, n)
+        repeat_str(str, n)
     );
 
     show_point((12, 42, 45, String::from("test")));
@@ -64,7 +64,7 @@ fn power_test_1() {
     // TODO
 
     for _ in 0..p {
-        r = r * n;
+        r *= n;
     }
 
     dbg!(r);
@@ -86,28 +86,28 @@ fn test_duration() {
     let diff: Duration = duration - duration2;
     // println!("diff is {diff}");
     dbg!(diff);
-    let diff_with_fn = duration.saturating_sub(duration2);
+    let _diff_with_fn = duration.saturating_sub(duration2);
     let diff_negativ_with_fn = duration2.saturating_sub(duration);
     dbg!(diff_negativ_with_fn);
 }
 
 fn display_diff(duration: Option<Duration>) {
-    if (!duration.is_none()) {
+    if duration.is_some() {
         dbg!(duration);
     } else {
         println!("Duration is not here")
     }
 }
 
-fn concat(str1: &mut String, str2: &String) {
+fn concat(str1: &mut String, str2: &str) {
     str1.push_str(str2);
     dbg!(str1);
 }
 
 fn repeat_str(str: &str, mut nb: i32) -> String {
     let mut str_res = String::from("");
-    while (nb > 0) {
-        str_res.push_str(&str);
+    while nb > 0 {
+        str_res.push_str(str);
         nb -= 1;
     }
     str_res
@@ -139,7 +139,7 @@ impl Display for Perso {
 
 impl Perso {
     fn heal(&mut self, points_to_add: u16) {
-        if (self.pv + points_to_add > 100) {
+        if self.pv + points_to_add > 100 {
             self.pv = 100;
         }
         self.pv += points_to_add;
@@ -150,12 +150,13 @@ impl Perso {
             Class::Mage {
                 mut points_of_magic,
             } => {
-                if (points_of_magic >= 25) {
+                if points_of_magic >= 25 {
                     points_of_magic -= 25; // how to get point of magic?
                 }
                 perso.pv -= 50;
             }
-            _ => (),
+            Class::Paladin => todo!(),
+            Class::Voleur => todo!(),
         }
     }
 }
@@ -167,7 +168,7 @@ fn game() -> (Perso, Perso) {
             points_of_magic: 50,
         },
     };
-    let aragorn = Perso {
+    let _aragorn = Perso {
         name: String::from("Aragorn"),
         pv: 75,
         class: Class::Voleur,
@@ -177,7 +178,7 @@ fn game() -> (Perso, Perso) {
         pv: 85,
         class: Class::Paladin,
     };
-    let gimli = Perso {
+    let _gimli = Perso {
         name: String::from("Gimli"),
         pv: 60,
         class: Class::Paladin,
